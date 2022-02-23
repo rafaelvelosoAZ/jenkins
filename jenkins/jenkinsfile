@@ -1,8 +1,7 @@
 pipeline{
     agent any 
     environment {
-        TF_IN_AUTOMATION = "true"
-        // KEYVAULT_URL = credentials('azure_keyvault_url') # keyVaultURL not able to be dereferenced with ${env.KEYVAULT_URL}, keeping for future reference
+        KEYVAULT_URL = credentials('azure_keyvault_url')
     }
     parameters {
         string(name: 'AZURE_KEYVAULT_URL', defaultValue: 'https://mvpnconfrafvs.vault.azure.net/')
