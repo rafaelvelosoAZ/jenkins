@@ -14,7 +14,7 @@ pipeline{
             
             options {
               azureKeyVault(
-                credentialID: "azure_service_principal",
+                credentialID: "5994a78e-ffd8-4a36-90dc-ae8fe625e019",
                 keyVaultURL: "${params.AZURE_KEYVAULT_URL}",
                 secrets: [
                     [envVariable: 'TF_BACKEND_STORAGE_ACCOUNT', name: 'TF-BACKEND-STORAGE-ACCOUNT', secretType: 'Secret'],
@@ -28,11 +28,11 @@ pipeline{
             steps {
                     ansiColor('xterm') {
                     withCredentials([azureServicePrincipal(
-                    credentialsId: 'azure_service_principal',
-                    subscriptionIdVariable: 'ARM_SUBSCRIPTION_ID',
-                    clientIdVariable: 'ARM_CLIENT_ID',
-                    clientSecretVariable: 'ARM_CLIENT_SECRET',
-                    tenantIdVariable: 'ARM_TENANT_ID'
+                    credentialsId: '5994a78e-ffd8-4a36-90dc-ae8fe625e019',
+                    subscriptionIdVariable: 'ARM-SUBSCRIPTION-ID',
+                    clientIdVariable: 'ARM-CLIENT-ID',
+                    clientSecretVariable: 'ARM-CLIENT-SECRET',
+                    tenantIdVariable: '	ARM-TENANT-ID'
                 )]) {
                         dir("src") {
                         sh """
