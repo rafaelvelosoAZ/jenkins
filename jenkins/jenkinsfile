@@ -21,9 +21,9 @@ pipeline{
                     [envVariable: 'TF_BACKEND_STORAGE_ACCOUNT', name: 'TF-BACKEND-STORAGE-ACCOUNT', secretType: 'Secret'],
                     [envVariable: 'TF_BACKEND_CONTAINER', name: 'TF-BACKEND-CONTAINER', secretType: 'Secret'],
                     [envVariable: 'TF_BACKEND_KEY', name: 'TF-BACKEND-KEY', secretType: 'Secret'],
-                    [envVariable: 'TF_BACKEND_RESOURCE_GROUP', name: 'TF-BACKEND-RESOURCE-GROUP', secretType: 'Secret']
-                    [envVariable: 'ARM_CLIEN_ID', name: 'ARM-CLIENT-ID', secretType: 'Secret']
-                    [envVariable: 'ARM_CLIENT_SECRET', name: 'ARM-CLIENT-SECRET', secretType: 'Secret']
+                    [envVariable: 'TF_BACKEND_RESOURCE_GROUP', name: 'TF-BACKEND-RESOURCE-GROUP', secretType: 'Secret'],
+                    [envVariable: 'ARM_CLIEN_ID', name: 'ARM-CLIENT-ID', secretType: 'Secret'],
+                    [envVariable: 'ARM_CLIENT_SECRET', name: 'ARM-CLIENT-SECRET', secretType: 'Secret'],
                     [envVariable: 'ARM_TENANT_ID', name: 'ARM-TENANT-ID', secretType: 'Secret']
                 ]
               )
