@@ -24,7 +24,8 @@ pipeline{
                     [envVariable: 'TF_BACKEND_RESOURCE_GROUP', name: 'TF-BACKEND-RESOURCE-GROUP', secretType: 'Secret'],
                     [envVariable: 'ARM_CLIENT_ID', name: 'ARM-CLIENT-ID', secretType: 'Secret'],
                     [envVariable: 'ARM_CLIENT_SECRET', name: 'ARM-CLIENT-SECRET', secretType: 'Secret'],
-                    [envVariable: 'ARM_TENANT_ID', name: 'ARM-TENANT-ID', secretType: 'Secret']
+                    [envVariable: 'ARM_TENANT_ID', name: 'ARM-TENANT-ID', secretType: 'Secret'],
+                    [envVariable: 'ARM_SUBSCRIPTION_ID', name: 'ARM-SUBSCRIPTION-ID', secretType: 'Secret']
                 ]
               )
             }
