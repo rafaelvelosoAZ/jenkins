@@ -22,7 +22,7 @@ pipeline{
                     [envVariable: 'TF_BACKEND_CONTAINER', name: 'TF-BACKEND-CONTAINER', secretType: 'Secret'],
                     [envVariable: 'TF_BACKEND_KEY', name: 'TF-BACKEND-KEY', secretType: 'Secret'],
                     [envVariable: 'TF_BACKEND_RESOURCE_GROUP', name: 'TF-BACKEND-RESOURCE-GROUP', secretType: 'Secret'],
-                    [envVariable: 'ARM_CLIEN_ID', name: 'ARM-CLIENT-ID', secretType: 'Secret'],
+                    [envVariable: 'ARM_CLIENT_ID', name: 'ARM-CLIENT-ID', secretType: 'Secret'],
                     [envVariable: 'ARM_CLIENT_SECRET', name: 'ARM-CLIENT-SECRET', secretType: 'Secret'],
                     [envVariable: 'ARM_TENANT_ID', name: 'ARM-TENANT-ID', secretType: 'Secret']
                 ]
@@ -41,7 +41,7 @@ pipeline{
                         dir("terraform/contoso") {
                         sh """
                         echo "Initialising Terraform"
-                        az login --service-principal -u $ARM_CLIEN_ID -p $ARM_CLIENT_SECRET -t $ARM_TENANT_ID
+                        az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET -t $ARM_TENANT_ID
                         terraform init -backend-config="storage_account_name=$TF_BACKEND_STORAGE_ACCOUNT" -backend-config="container_name=$TF_BACKEND_CONTAINER" -backend-config="key=$TF_BACKEND_KEY" -backend-config="resource_group_name=$TF_BACKEND_RESOURCE_GROUP"
                         """
                         }
