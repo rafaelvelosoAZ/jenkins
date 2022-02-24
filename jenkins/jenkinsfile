@@ -45,90 +45,75 @@ pipeline{
              }
         }
 
-        // stage('Terraform Plan'){
+        stage('Terraform Plan'){
             
-        //     options {
-        //       azureKeyVault(
-        //         credentialID: "azure_service_principal",
-        //         keyVaultURL: "${params.AZURE_KEYVAULT_URL}",
-        //         secrets: [
-        //             [envVariable: 'TF_BACKEND_STORAGE_ACCOUNT', name: 'BACKEND-STORAGE-ACCOUNT-NAME', secretType: 'Secret'],
-        //             [envVariable: 'TF_BACKEND_CONTAINER', name: 'BACKEND-STORAGE-ACCOUNT-CONTAINER-NAME', secretType: 'Secret'],
-        //             [envVariable: 'TF_BACKEND_KEY', name: 'BACKEND-KEY', secretType: 'Secret'],
-        //             [envVariable: 'TF_BACKEND_RESOURCE_GROUP', name: 'RG-NAME', secretType: 'Secret'],
-        //             [envVariable: 'ARM_ACCESS_KEY', name: 'BACKEND-ACCESS-KEY', secretType: 'Secret'],
-        //             [envVariable: 'EGVB_APP_SERVICE_NAME', name: 'EGVB-APP-SERVICE-NAME', secretType: 'Secret'],
-        //             [envVariable: 'EGVB_APP_SERVICE_PLAN_NAME', name: 'EGVB-APP-SERVICE-PLAN-NAME', secretType: 'Secret'],
-        //             [envVariable: 'LOCATION', name: 'LOCATION', secretType: 'Secret']
-        //         ]
-        //       )
-        //     }
+            options {
+              azureKeyVault(
+                credentialID: "azure_service_principal",
+                keyVaultURL: "https://mvpnconfrafvs.vault.azure.net/",
+                secrets: [
+                    [envVariable: 'TF_BACKEND_STORAGE_ACCOUNT', name: 'TF-BACKEND-STORAGE-ACCOUNT', secretType: 'Secret'],
+                    [envVariable: 'TF_BACKEND_CONTAINER', name: 'TF-BACKEND-CONTAINER', secretType: 'Secret'],
+                    [envVariable: 'TF_BACKEND_KEY', name: 'TF-BACKEND-KEY', secretType: 'Secret'],
+                    [envVariable: 'TF_BACKEND_RESOURCE_GROUP', name: 'TF-BACKEND-RESOURCE-GROUP', secretType: 'Secret']
+                ]
+              )
+            }
 
-        //     steps {
-        //             ansiColor('xterm') {
-        //             withCredentials([azureServicePrincipal(
-        //             credentialsId: 'azure_service_principal',
-        //             subscriptionIdVariable: 'ARM_SUBSCRIPTION_ID',
-        //             clientIdVariable: 'ARM_CLIENT_ID',
-        //             clientSecretVariable: 'ARM_CLIENT_SECRET',
-        //             tenantIdVariable: 'ARM_TENANT_ID'
-        //         )]) {
-        //                 dir("src") {
-        //                 sh """
-        //                 echo "Creating Terraform Plan"
-        //                 terraform plan -var "resource_group_name=$TF_BACKEND_RESOURCE_GROUP" -var "resource_group_region=$LOCATION" -var "web_app_name=$EGVB_APP_SERVICE_NAME" -var "app_service_plan_name=$EGVB_APP_SERVICE_PLAN_NAME"
-        //                 """
-        //                 }
-        //              }
-        //         }
-        //      }
-        // } 
+            steps {
+                    ansiColor('xterm') {
+                    withCredentials([azureServicePrincipal(
+                    credentialsId: 'azure_service_principal',
+                    subscriptionIdVariable: 'ARM-SUBSCRIPTION-ID',
+                    clientIdVariable: 'ARM-CLIENT-ID',
+                    clientSecretVariable: 'ARM-CLIENT-SECRET',
+                    tenantIdVariable: '	ARM-TENANT-ID'
+                )]) {
+                        dir("terraform/contoso") {
+                        sh """
+                        echo "Terraform Plan"
+                        terraform plan -auto-approve -var-file=../env/dev.tfvars
+                        """
+                        }
+                     }
+                }
+             }
+        }
 
-        // stage('Waiting for Approval'){
-        //     steps {
-        //         timeout(time: 10, unit: 'MINUTES') {
-        //             input (message: "Deploy the infrastructure?")
-        //         }
-        //     }
-        // }
-
-        // stage('Terraform Apply'){
+        stage('Terraform Apply'){
             
-        //     options {
-        //       azureKeyVault(
-        //         credentialID: "azure_service_principal",
-        //         keyVaultURL: "${params.AZURE_KEYVAULT_URL}",
-        //         secrets: [
-        //             [envVariable: 'TF_BACKEND_STORAGE_ACCOUNT', name: 'BACKEND-STORAGE-ACCOUNT-NAME', secretType: 'Secret'],
-        //             [envVariable: 'TF_BACKEND_CONTAINER', name: 'BACKEND-STORAGE-ACCOUNT-CONTAINER-NAME', secretType: 'Secret'],
-        //             [envVariable: 'TF_BACKEND_KEY', name: 'BACKEND-KEY', secretType: 'Secret'],
-        //             [envVariable: 'TF_BACKEND_RESOURCE_GROUP', name: 'RG-NAME', secretType: 'Secret'],
-        //             [envVariable: 'ARM_ACCESS_KEY', name: 'BACKEND-ACCESS-KEY', secretType: 'Secret'],
-        //             [envVariable: 'EGVB_APP_SERVICE_NAME', name: 'EGVB-APP-SERVICE-NAME', secretType: 'Secret'],
-        //             [envVariable: 'EGVB_APP_SERVICE_PLAN_NAME', name: 'EGVB-APP-SERVICE-PLAN-NAME', secretType: 'Secret'],
-        //             [envVariable: 'LOCATION', name: 'LOCATION', secretType: 'Secret']
-        //         ]
-        //       )
-        //     }
+            options {
+              azureKeyVault(
+                credentialID: "azure_service_principal",
+                keyVaultURL: "https://mvpnconfrafvs.vault.azure.net/",
+                secrets: [
+                    [envVariable: 'TF_BACKEND_STORAGE_ACCOUNT', name: 'TF-BACKEND-STORAGE-ACCOUNT', secretType: 'Secret'],
+                    [envVariable: 'TF_BACKEND_CONTAINER', name: 'TF-BACKEND-CONTAINER', secretType: 'Secret'],
+                    [envVariable: 'TF_BACKEND_KEY', name: 'TF-BACKEND-KEY', secretType: 'Secret'],
+                    [envVariable: 'TF_BACKEND_RESOURCE_GROUP', name: 'TF-BACKEND-RESOURCE-GROUP', secretType: 'Secret']
+                ]
+              )
+            }
 
-        //     steps {
-        //             ansiColor('xterm') {
-        //             withCredentials([azureServicePrincipal(
-        //             credentialsId: 'azure_service_principal',
-        //             subscriptionIdVariable: 'ARM_SUBSCRIPTION_ID',
-        //             clientIdVariable: 'ARM_CLIENT_ID',
-        //             clientSecretVariable: 'ARM_CLIENT_SECRET',
-        //             tenantIdVariable: 'ARM_TENANT_ID'
-        //         )]) {
-        //                 dir("src") {
-        //                 sh """
-        //                 echo "Applying the plan"
-        //                 terraform apply -auto-approve -var "resource_group_name=$TF_BACKEND_RESOURCE_GROUP" -var "resource_group_region=$LOCATION" -var "web_app_name=$EGVB_APP_SERVICE_NAME" -var "app_service_plan_name=$EGVB_APP_SERVICE_PLAN_NAME"
-        //                 """
-        //                 }
-        //              }
-        //         }
-        //      }
-        // }
-    }
+            steps {
+                    ansiColor('xterm') {
+                    withCredentials([azureServicePrincipal(
+                    credentialsId: 'azure_service_principal',
+                    subscriptionIdVariable: 'ARM-SUBSCRIPTION-ID',
+                    clientIdVariable: 'ARM-CLIENT-ID',
+                    clientSecretVariable: 'ARM-CLIENT-SECRET',
+                    tenantIdVariable: '	ARM-TENANT-ID'
+                )]) {
+                        dir("terraform/contoso") {
+                        sh """
+                        echo "Apply"
+                        terraform apply -auto-approve -var-file=../env/dev.tfvars
+                        """
+                        }
+                     }
+                }
+             }
+        }
+
+     }
 }
