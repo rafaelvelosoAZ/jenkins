@@ -34,7 +34,7 @@ pipeline{
                     clientSecretVariable: 'ARM-CLIENT-SECRET',
                     tenantIdVariable: '	ARM-TENANT-ID'
                 )]) {
-                        dir("src") {
+                        dir("terraform/contoso") {
                         sh """
                         echo "Initialising Terraform"
                         cd ../terraform/contoso
