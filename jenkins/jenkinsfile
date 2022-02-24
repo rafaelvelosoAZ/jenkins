@@ -1,7 +1,8 @@
 pipeline{
     agent any 
      environment {
-        TF_IN_AUTOMATION = "true"
+        TF_HOME = tool ('Terraform')
+        PATH = "$TF_HOME:$PATH"
         // KEYVAULT_URL = credentials('azure_keyvault_url') # keyVaultURL not able to be dereferenced with ${env.KEYVAULT_URL}, keeping for future reference
     }
     parameters {
