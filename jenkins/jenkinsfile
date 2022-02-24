@@ -72,7 +72,7 @@ pipeline{
                         dir("terraform/contoso") {
                         sh """
                         echo "Terraform Plan"
-                        terraform plan -auto-approve -var-file=../env/dev.tfvars
+                        terraform plan -var-file=../env/dev.tfvars
                         """
                         }
                      }
