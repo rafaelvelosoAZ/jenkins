@@ -1,4 +1,4 @@
 resource_groups = {
-  "rgone" = {
+  "test-jenkins" = {
     location = "westus"
   }
