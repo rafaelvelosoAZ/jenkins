@@ -84,7 +84,7 @@ pipeline{
                         echo "Terraform Plan"
                         az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET -t $ARM_TENANT_ID
                         terraform init -reconfigure -backend-config="storage_account_name=$TF_BACKEND_STORAGE_ACCOUNT" -backend-config="container_name=$TF_BACKEND_CONTAINER" -backend-config="key=$TF_BACKEND_KEY" -backend-config="resource_group_name=$TF_BACKEND_RESOURCE_GROUP"
-                        terraform plan -var-file=../env/dev.tfvars
+                        terraform plan -var-file=env/dev.tfvars
                         """
                         }
                      }
@@ -125,7 +125,7 @@ pipeline{
                         echo "Apply"
                         az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET -t $ARM_TENANT_ID
                         terraform init -reconfigure -backend-config="storage_account_name=$TF_BACKEND_STORAGE_ACCOUNT" -backend-config="container_name=$TF_BACKEND_CONTAINER" -backend-config="key=$TF_BACKEND_KEY" -backend-config="resource_group_name=$TF_BACKEND_RESOURCE_GROUP"
-                        terraform apply -auto-approve -var-file=../env/dev.tfvars
+                        terraform apply -auto-approve -var-file=env/dev.tfvars
                         """
                         }
                      }
