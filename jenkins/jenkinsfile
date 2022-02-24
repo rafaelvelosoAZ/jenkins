@@ -19,7 +19,7 @@ pipeline{
                 secrets: [
                     [envVariable: 'TF_BACKEND_STORAGE_ACCOUNT', name: 'TF-BACKEND-STORAGE-ACCOUNT', secretType: 'Secret'],
                     [envVariable: 'TF_BACKEND_CONTAINER', name: 'TF-BACKEND-CONTAINER', secretType: 'Secret'],
-                    [envVariable: 'TF_TF_BACKEND_KEY', name: 'TF-BACKEND-KEY', secretType: 'Secret'],
+                    [envVariable: 'TF_BACKEND_KEY', name: 'TF-BACKEND-KEY', secretType: 'Secret'],
                     [envVariable: 'TF_BACKEND_RESOURCE_GROUP', name: 'TF-BACKEND-RESOURCE-GROUP', secretType: 'Secret']
                 ]
               )
